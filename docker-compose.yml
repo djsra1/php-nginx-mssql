@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+    
+    # MSSQL database service
+    # put your .mdf, .ldf etc. files in ./db/
+    # put your strong MSSQL password in ./config/.env
+    sqlserver:
+        container_name: sql_server
+        image: mcr.microsoft.com/mssql/server:2019-latest 
+        ports:
+            - 1433:1433
+        environment:
+            ACCEPT_EULA: Y
+            SA_PASSWORD: ($${DB_PASSWORD}) 
+        env_file:
+            - ./config/.env
+        volumes:
+            - ./db/:/var/opt/mssql/data     
+   
+    # PHP service
+    # put your web-project in ./www/
+    # Attention! Connect to MSSQL in case of Windows OS 
+    # by host-ip-adress only. Localhost is not working. 
+    app:
+        build: ./config/php
+        container_name: php-app
+        working_dir: /var/www/html
+        volumes:
+            - ./www/:/var/www/html 
+        depends_on: 
+            - sqlserver  
+
+    # Nginx service
+    nginx:
+        image: nginx:alpine
+        container_name: php-nginx
+        ports:
+            - 8080:80
+        volumes:
+            - ./www/:/var/www/html   
+            - ./config/nginx/:/etc/nginx/conf.d/
+        depends_on: 
+            - app
+
