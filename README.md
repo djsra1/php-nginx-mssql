@@ -1,5 +1,5 @@
 # php-nginx-mssql
-Dockers and docker-compose for WEB PHP+MS SQL Server development in Windows.
+Dockers and docker-compose for PHP+MS SQL Server WEB-development on Windows.
 
 The similar decision for Linux is here https://github.com/Nebezcoda/php_nginx_mssql
 
