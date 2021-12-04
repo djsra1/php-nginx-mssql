@@ -9,3 +9,5 @@ put .mdf, .ndf, .ldf to DB
 
 start containers with docker-compose.yml
 check the connection with localhost:8080
+
+Attach your DB-files to SQLServer
