@@ -5,7 +5,7 @@ services:
     # put your .mdf, .ldf etc. files in ./db/
     # put your strong MSSQL password in ./config/.env
     sqlserver:
-        container_name: sql_server
+        container_name: mssql
         image: mcr.microsoft.com/mssql/server:2019-latest 
         ports:
             - 1433:1433
@@ -20,7 +20,7 @@ services:
     # by host-ip-adress only. Localhost is not working. 
     app:
         build: ./config/php
-        container_name: php-app
+        container_name: php
         working_dir: /var/www/html
         volumes:
             - ./www/:/var/www/html 
@@ -30,7 +30,7 @@ services:
     # Nginx service
     nginx:
         image: nginx:alpine
-        container_name: php-nginx
+        container_name: nginx
         ports:
             - 8080:80
         volumes:
