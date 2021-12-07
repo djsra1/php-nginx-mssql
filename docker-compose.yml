@@ -5,14 +5,25 @@ services:
     # put your .mdf, .ldf etc. files in ./db/
     # put your strong MSSQL password in ./config/.env
     sqlserver:
-        container_name: mssql
-        image: mcr.microsoft.com/mssql/server:2019-latest 
+        container_name: stEg-mssql
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        #build: ./config/mssql
         ports:
             - 1433:1433
         env_file:
             - ./config/.env
+        #envionment: # this section doesn't work. look php/Dockerfile 
+        #    ACCEPT_EULA: Y
+        #    SA_PASSWORD: $${DB_PASSWORD}
+        
         volumes:
-            - ./db/:/var/opt/mssql/data     
+            - ./db/:/var/opt/mssql/data
+        #command: /opt/mssql/bin/sqlservr      
+       # entrypoint: /var/opt/mssql/data/install.sh
+         #   command: /opt/mssql/bin/sqlservr 
+             #     - /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P mssql_stego2021 -i /var/opt/mssql/data/startDB.sql 
+         #   - cd /var/opt/mssql/data/
+          #  - bash install.sh   
    
     # PHP service
     # put your web-project in ./www/
@@ -20,17 +31,19 @@ services:
     # by host-ip-adress only. Localhost is not working. 
     app:
         build: ./config/php
-        container_name: php
+        container_name: stEg-php
         working_dir: /var/www/html
+        env_file:
+            - ./config/.env
         volumes:
             - ./www/:/var/www/html 
         depends_on: 
-            - sqlserver  
+           - sqlserver  
 
     # Nginx service
     nginx:
         image: nginx:alpine
-        container_name: nginx
+        container_name: stEg-nginx
         ports:
             - 8080:80
         volumes:
@@ -39,3 +52,7 @@ services:
         depends_on: 
             - app
 
+networks:
+  default:
+    name: "backend"
+    external: true
