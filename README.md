@@ -12,4 +12,5 @@ put .mdf, .ndf, .ldf or .bak to DB
 start containers with docker-compose.yml
 check the connection with localhost:8080
 
-Attach your DB-files to SQLServer manually or by BAT-files
+Attach your DB-files to SQLServer manually or 
+by BAT-files (SA_PASSWORD inside - fit it). DB and files names must be fit in /DB/.sql
