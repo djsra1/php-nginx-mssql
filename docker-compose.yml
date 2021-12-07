@@ -12,19 +12,9 @@ services:
             - 1433:1433
         env_file:
             - ./config/.env
-        #envionment: # this section doesn't work. look php/Dockerfile 
-        #    ACCEPT_EULA: Y
-        #    SA_PASSWORD: $${DB_PASSWORD}
-        
         volumes:
             - ./db/:/var/opt/mssql/data
-        #command: /opt/mssql/bin/sqlservr      
-       # entrypoint: /var/opt/mssql/data/install.sh
-         #   command: /opt/mssql/bin/sqlservr 
-             #     - /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P mssql_stego2021 -i /var/opt/mssql/data/startDB.sql 
-         #   - cd /var/opt/mssql/data/
-          #  - bash install.sh   
-   
+          
     # PHP service
     # put your web-project in ./www/
     # Attention! Connect to MSSQL in case of Windows OS 
