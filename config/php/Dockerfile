@@ -1,6 +1,10 @@
 FROM php:7.4-fpm-buster
+ARG SA_PASSWORD 
 
-ENV ACCEPT_EULA=Y
+
+# for curl  https://packages.microsoft.com/keys/microsoft.asc
+ENV ACCEPT_EULA Y 
+#ENV test_env $SA_PASSWORD
 
 # Install prerequisites required for tools and extensions installed later on.
 RUN apt-get update \
