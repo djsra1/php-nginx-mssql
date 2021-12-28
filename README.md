@@ -1,9 +1,7 @@
 # php-nginx-mssql
-Dockers and docker-compose for PHP+MS SQL Server WEB-development on Windows.
+Dockers and docker-compose for PHP+MS SQL Server WEB-development on CentOS 8.
 
 For all functionality your have to create the "backend" network
-
-The similar decision for Linux is here https://github.com/Nebezcoda/php_nginx_mssql
 
 create the DB folder for you database files
 put WEB-project to WWW
